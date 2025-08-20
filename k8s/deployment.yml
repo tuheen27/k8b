@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-application
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-application
+  template:
+    metadata:
+      labels:
+        app: flask-application
+    spec:
+      containers:
+      - name: flask-application
+        image: tuheen27/k8s-deployment:latest
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
